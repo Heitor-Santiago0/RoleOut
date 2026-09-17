@@ -1,0 +1,42 @@
+services:
+
+  mysql:
+    image: mysql:8.4
+    container_name: roleout-mysql
+    restart: always
+
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: roleout
+      MYSQL_USER: roleout
+      MYSQL_PASSWORD: roleout123
+
+    ports:
+      - "3306:3306"
+
+    volumes:
+      - roleout_mysql_data:/var/lib/mysql
+
+
+  tomcat:
+    image: tomcat:10.1-jdk17-temurin
+    container_name: roleout-tomcat
+    restart: always
+
+    depends_on:
+      - mysql
+
+    environment:
+      DB_URL: jdbc:mysql://mysql:3306/roleout
+      DB_USER: roleout
+      DB_PASSWORD: roleout123
+
+    ports:
+      - "8080:8080"
+
+    volumes:
+      - ./target/RoleOut.war:/usr/local/tomcat/webapps/RoleOut.war
+
+volumes:
+  roleout_mysql_data:
+  
