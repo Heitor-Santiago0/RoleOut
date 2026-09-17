@@ -1,188 +1,403 @@
-RolêOut 🎉
+# RolêOut
 
-Aplicação web para cadastro e sugestão de rolês, desenvolvida como projeto acadêmico.
+Aplicação web desenvolvida como projeto acadêmico para cadastro, gerenciamento e sugestão de rolês.
 
-O RolêOut permite cadastrar rolês e, a partir de informações fornecidas pelo usuário, buscar sugestões de acordo com critérios como categoria, cidade e orçamento máximo.
+O **RolêOut** permite que usuários cadastrem opções de lazer e utilizem filtros como categoria, cidade e orçamento máximo para encontrar sugestões compatíveis com suas preferências.
 
-📌 Objetivo
+## Objetivo
 
-O objetivo do projeto é facilitar a escolha de atividades e lugares para sair, permitindo que o usuário encontre opções de rolês compatíveis com suas preferências.
+O objetivo do projeto é facilitar a escolha de atividades, eventos e lugares para sair.
 
-A aplicação foi desenvolvida utilizando uma arquitetura baseada no padrão MVC (Model-View-Controller), separando as responsabilidades da aplicação e facilitando sua manutenção.
+Além do gerenciamento dos rolês cadastrados, o sistema possui uma funcionalidade de recomendação baseada nos critérios informados pelo usuário.
 
-✨ Funcionalidades
+A aplicação foi desenvolvida utilizando o padrão de arquitetura **MVC (Model-View-Controller)**, além das camadas **DAO** e **Service**, buscando manter o projeto organizado, modular e de fácil manutenção.
 
-Cadastro de rolês;
+## Funcionalidades
 
-Listagem dos rolês cadastrados;
+* Cadastro de rolês
+* Listagem de rolês cadastrados
+* Edição de rolês
+* Exclusão de rolês
+* Busca de sugestões de rolês
+* Filtro de sugestões por categoria
+* Filtro de sugestões por cidade
+* Filtro de sugestões por orçamento máximo
+* Validação dos dados informados
+* Persistência de dados em banco MySQL
+* Interface web utilizando JSP, HTML e CSS
+* Confirmação antes da exclusão de registros
 
-Edição de rolês;
+## Sistema de Sugestões
 
-Exclusão de rolês;
+O RolêOut possui uma funcionalidade específica para encontrar opções de rolês com base nas preferências do usuário.
 
-Busca de sugestões de rolês;
+O usuário informa:
 
-Filtro de sugestões por:
+* **Categoria desejada**
+* **Cidade**
+* **Orçamento máximo**
 
-Categoria;
+A aplicação utiliza esses dados para consultar os rolês cadastrados no banco de dados e retornar apenas aqueles que correspondem aos critérios informados.
 
-Cidade;
+### Exemplo
 
-Valor máximo;
+**Categoria:** Música
+**Cidade:** Uberaba
+**Orçamento máximo:** R$ 50,00
 
-Validação dos dados cadastrados;
+O sistema poderá retornar rolês cadastrados que atendam a:
 
-Interface web utilizando JSP;
+* Categoria = Música
+* Cidade = Uberaba
+* Valor ≤ R$ 50,00
 
-Persistência dos dados em banco de dados MySQL.
+Dessa forma, o RolêOut não funciona apenas como um sistema de cadastro, mas também como uma aplicação de sugestão de opções de lazer.
 
-🧩 Arquitetura
+## Arquitetura
 
-O projeto utiliza o padrão MVC:
+O projeto utiliza o padrão **MVC** em conjunto com as camadas **DAO** e **Service**.
 
-Model
+### Model
 
-Responsável pela representação dos dados da aplicação.
+Responsável pela representação dos dados utilizados pela aplicação.
 
-Exemplo:
+**Classe principal:**
 
-Role
+* `Role`
 
-View
+Essa classe representa um rolê e contém informações como:
+
+* ID
+* Nome
+* Descrição
+* Local
+* Cidade
+* Data
+* Categoria
+* Valor
+
+### View
 
 Responsável pela interface apresentada ao usuário.
 
-Tecnologias utilizadas:
+As páginas foram desenvolvidas utilizando:
 
-JSP;
+* JSP
+* HTML5
+* CSS3
+* JSTL
 
-HTML;
+**Principais telas:**
 
-CSS.
+* Página inicial
+* Gerenciamento de rolês
+* Cadastro e edição de rolês
+* Busca de sugestões
+* Resultados das sugestões
 
-Controller
+### Controller
 
-Responsável por receber as requisições do usuário, chamar os serviços necessários e encaminhar as respostas para as páginas.
+Responsável por receber as requisições realizadas pelo navegador e encaminhá-las para as demais camadas da aplicação.
 
-Service
+**Controllers principais:**
 
-Contém as regras de negócio da aplicação, como validações e a lógica de busca das sugestões.
+* `RoleController`
+* `SugestaoController`
 
-DAO
+### Service
 
-Responsável pela comunicação com o banco de dados MySQL.
+Responsável pelas regras de negócio e validações da aplicação.
 
-🛠️ Tecnologias utilizadas
+**Classe principal:**
 
-Java
+* `RoleService`
 
-JSP (JavaServer Pages)
+Entre suas responsabilidades estão:
 
-Servlets
+* Validar dados dos rolês
+* Encaminhar operações para o DAO
+* Validar parâmetros utilizados na busca de sugestões
 
-Maven
+### DAO
 
-MySQL
+Responsável pela comunicação direta com o banco de dados.
 
-Docker
+**Classe principal:**
 
-Docker Compose
+* `RoleDAO`
 
-HTML5
+O DAO implementa operações como:
 
-CSS3
+* Inserção
+* Consulta
+* Atualização
+* Exclusão
+* Busca de rolês por critérios de sugestão
 
-Git e GitHub
+### Config
 
-Apache Tomcat
+Responsável pelas configurações relacionadas à aplicação.
 
-🗄️ Banco de dados
+**Classe principal:**
 
-O sistema utiliza o MySQL para armazenar os dados dos rolês cadastrados.
+* `ConnectionFactory`
 
-A aplicação utiliza o Docker Compose para facilitar a configuração do ambiente e execução do banco de dados.
+Essa classe é responsável por estabelecer a conexão entre a aplicação Java e o banco de dados MySQL.
 
-▶️ Como executar o projeto
+## CRUD
 
-Pré-requisitos
+O sistema implementa um CRUD completo para gerenciamento dos rolês.
 
-Antes de executar o projeto, é necessário ter instalado:
+### Create
 
-Java JDK;
+Permite cadastrar novos rolês.
 
-Maven;
+### Read
 
-Docker e Docker Compose;
+Permite listar os rolês existentes.
 
-Uma IDE compatível com projetos Java/Maven, como NetBeans ou IntelliJ IDEA.
+### Update
 
-Executando
+Permite alterar informações de um rolê cadastrado.
 
-Clone este repositório:
+### Delete
 
-git clone https://github.com/Heitor-Santiago0/RoleOut.git
+Permite excluir um rolê do sistema.
 
-Entre na pasta do projeto:
+## Tecnologias Utilizadas
 
-cd RoleOut
+* Java 17
+* Jakarta Servlets
+* JSP
+* JSTL
+* Maven
+* MySQL 8.4
+* JDBC
+* Apache Tomcat 10
+* Docker
+* Docker Compose
+* HTML5
+* CSS3
+* Git
+* GitHub
 
-Inicie os serviços necessários utilizando o Docker Compose:
+## Banco de Dados
 
-docker compose up -d
+O sistema utiliza **MySQL** para armazenamento dos dados.
 
-Compile o projeto com Maven:
+A principal tabela da aplicação é:
 
-mvn clean package
+`roles`
 
-Execute a aplicação em um servidor compatível com Jakarta EE/Servlets, como o Apache Tomcat.
+Ela possui os seguintes campos:
 
-📂 Estrutura do projeto
+* `id`
+* `nome`
+* `descricao`
+* `local`
+* `cidade`
+* `data`
+* `categoria`
+* `valor`
 
-A estrutura principal segue a organização de um projeto Maven:
+O campo `id` é utilizado como chave primária e possui incremento automático.
 
+O banco de dados é executado através de um container Docker.
+
+## Estrutura do Projeto
+
+```text
 RoleOut/
+│
 ├── src/
 │   └── main/
 │       ├── java/
-│       │   └── br/com/roleout/
-│       │       ├── controller/
-│       │       ├── dao/
-│       │       ├── model/
-│       │       └── service/
+│       │   └── br/
+│       │       └── com/
+│       │           └── roleout/
+│       │               ├── config/
+│       │               │   └── ConnectionFactory.java
+│       │               │
+│       │               ├── controller/
+│       │               │   ├── RoleController.java
+│       │               │   └── SugestaoController.java
+│       │               │
+│       │               ├── dao/
+│       │               │   └── RoleDAO.java
+│       │               │
+│       │               ├── model/
+│       │               │   └── Role.java
+│       │               │
+│       │               └── service/
+│       │                   └── RoleService.java
 │       │
 │       └── webapp/
 │           ├── index.jsp
-│           └── ...
+│           ├── css/
+│           │   └── style.css
+│           ├── images/
+│           └── WEB-INF/
+│               ├── web.xml
+│               └── views/
+│                   ├── role-form.jsp
+│                   ├── role-list.jsp
+│                   ├── sugestao-form.jsp
+│                   └── sugestao-list.jsp
 │
 ├── docker-compose.yml
 ├── pom.xml
+├── .gitignore
 └── README.md
+```
 
-A estrutura pode variar conforme a organização final dos arquivos do projeto.
+## Pré-requisitos
 
-💡 Como funciona a sugestão de rolês
+Para executar o projeto, é necessário possuir:
 
-O usuário informa os critérios desejados, como:
+* Java JDK 17
+* Apache Maven
+* Docker
+* Docker Compose
+* Git
+* Navegador web
 
-Categoria do rolê;
+Também pode ser utilizado qualquer editor ou IDE compatível com Java e Maven, como:
 
-Cidade;
+* Visual Studio Code
+* Apache NetBeans
+* IntelliJ IDEA
 
-Orçamento máximo.
+## Como Executar o Projeto
 
-O sistema utiliza essas informações para consultar os rolês cadastrados no banco de dados e apresentar as opções que correspondem aos critérios informados.
+### 1. Clonar o repositório
 
-Dessa forma, o sistema não serve apenas para cadastrar rolês: ele também possui uma funcionalidade específica para encontrar sugestões de acordo com as preferências do usuário.
+```bash
+git clone https://github.com/Heitor-Santiago0/RoleOut.git
+```
 
-🎓 Projeto acadêmico
+### 2. Entrar na pasta do projeto
 
-Projeto desenvolvido para fins acadêmicos no curso de Análise e Desenvolvimento de Sistemas (ADS).
+```bash
+cd RoleOut
+```
 
-👨‍💻 Autor
+### 3. Compilar o projeto
 
-Heitor Santiago
-Vinícius Henrique
+```bash
+mvn clean package
+```
 
-GitHub: https://github.com/Heitor-Santiago0
+Esse comando gera o arquivo:
 
-RolêOut — encontre um rolê que combina com você! 🎉
+```text
+target/RoleOut.war
+```
+
+### 4. Iniciar os containers
+
+```bash
+docker compose up -d
+```
+
+O Docker Compose irá iniciar:
+
+* MySQL
+* Apache Tomcat
+
+### 5. Verificar os containers
+
+```bash
+docker ps
+```
+
+Os containers esperados são:
+
+```text
+roleout-mysql
+roleout-tomcat
+```
+
+### 6. Acessar a aplicação
+
+Abra o navegador e acesse:
+
+```text
+http://localhost:8080/RoleOut/
+```
+
+## Principais Endereços
+
+**Página inicial**
+
+```text
+http://localhost:8080/RoleOut/
+```
+
+**Gerenciamento de Rolês**
+
+```text
+http://localhost:8080/RoleOut/roles
+```
+
+**Busca de Sugestões**
+
+```text
+http://localhost:8080/RoleOut/sugestoes
+```
+
+## Fluxo da Aplicação
+
+```text
+Usuário
+   ↓
+View (JSP)
+   ↓
+Controller
+   ↓
+Service
+   ↓
+DAO
+   ↓
+MySQL
+```
+
+A View envia uma requisição ao Controller.
+
+O Controller utiliza o Service para executar a lógica necessária.
+
+O Service aplica as regras de negócio e utiliza o DAO.
+
+O DAO realiza as operações no banco de dados MySQL.
+
+Os dados retornam pelas mesmas camadas até serem apresentados novamente ao usuário.
+
+## Versionamento
+
+O projeto utiliza **Git** para controle de versão e **GitHub** para armazenamento do repositório remoto.
+
+**Repositório:**
+
+https://github.com/Heitor-Santiago0/RoleOut
+
+## Projeto Acadêmico
+
+Projeto desenvolvido para fins acadêmicos no curso de **Análise e Desenvolvimento de Sistemas**.
+
+## Integrantes
+
+### Heitor Santiago
+
+**RA:** 5174491
+
+**GitHub:**
+https://github.com/Heitor-Santiago0
+
+### Vinicius Henrique
+
+**RA:** 5174473
+
+## Considerações Finais
+
+O RolêOut foi desenvolvido com o objetivo de aplicar conceitos de desenvolvimento web em Java, arquitetura MVC, persistência de dados, organização em camadas e controle de versão.
+
+Além do CRUD completo de rolês, a aplicação possui uma funcionalidade de sugestão baseada nas preferências do usuário, permitindo que os rolês cadastrados sejam utilizados para encontrar opções de lazer compatíveis com categoria, cidade e orçamento.
